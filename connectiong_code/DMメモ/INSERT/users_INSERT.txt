@@ -1,0 +1,161 @@
+('本行 桃果', 'momoka.hongyo@jp.yazaki.com'),
+
+
+
+INSERT INTO users (name, email) VALUES
+('柴田 あゆ', 'ayu.shibata@jp.yazaki.com'),
+('東野 晋之介', 'shinnosuke.higashino@jp.yazaki.com'),
+('山浦 華穂', 'kaho.yamaura@jp.yazaki.com'),
+('山本 昂樹', 'koki.yamamoto.1206@jp.yazaki.com'),
+('日浦 和哉', 'kazuya.hiura_kh@jp.yazaki.com'),
+('髙塚 優月', 'yuduki.takatsuka@jp.yazaki.com'),
+('川上 遼菜', 'haruna.kawakami@jp.yazaki.com'),
+('久保田 千菜美', 'chinami.kubota@jp.yazaki.com'),
+('西尾 学', 'manabu.nishio@jp.yazaki.com'),
+('小澤 彩子', 'ayako.ozawa@jp.yazaki.com'),
+('駒野 有香', 'yuka.komano@jp.yazaki.com'),
+('城所 久留実', 'kurumi.kidokoro@jp.yazaki.com'),
+('袴田 貴彦', 'takahiko.hakamata@jp.yazaki.com'),
+('横山 耀平', 'yohei.yokoyama@jp.yazaki.com'),
+('髙杉 直哉', 'naoya.takasugi@jp.yazaki.com'),
+('永島 優里', 'yuri.nagashima@jp.yazaki.com'),
+('平田 夢乃', NULL),
+('永松 瑠菜', 'runa.nagamatsu@jp.yazaki.com'),
+('髙島 聖', 'hijiri.takashima@jp.yazaki.com'),
+('木村 駿介', 'shunsuke.kimura@jp.yazaki.com'),
+('鈴木 夏海', 'natsumi.suzuki@jp.yazaki.com'),
+('髙谷 侑翔', 'yuto.takatani@jp.yazaki.com'),
+('杉山 弥優', 'miyu.sugiyama@jp.yazaki.com'),
+('小安 唯衣', 'yui.koyasu@jp.yazaki.com'),
+('原口 直大', 'naohiro.haraguchi@jp.yazaki.com'),
+('近藤 茉杏咲', 'maasa.kondo@jp.yazaki.com'),
+('圡谷 恵菜', 'ayana.tsuchiya@jp.yazaki.com'),
+('浦 智博', 'tomohiro.ura@jp.yazaki.com'),
+('都竹 佑樹', 'yuuki.tsuduku@jp.yazaki.com'),
+('吉田 庵', 'iori.yoshida@jp.yazaki.com'),
+('青山 知裕', 'tomohiro.aoyama@jp.yazaki.com'),
+('高井 光汰', 'kouta.takai@jp.yazaki.com'),
+('吉田 健', 'ken.yoshida@jp.yazaki.com');
+
+
+
+INSERT INTO users (name, email) VALUES
+('松本 光弘', 'mitsuhiro.matsumoto.mm@jp.yazaki.com'),
+('今野 志', 'nozomi.konno@jp.yazaki.com'),
+('鈴木 義之', 'yoshiyuki.suzuki.0105@jp.yazaki.com'),
+('大隅 航佑', 'kosuke.osumi@jp.yazaki.com'),
+('木村 枝美莉', 'emiri.kimura@jp.yazaki.com'),
+('矢後 達也', 'tatsuya.yago@jp.yazaki.com'),
+('酒井 燈', 'akari.sakai@jp.yazaki.com'),
+('間 雄大', 'takahiro.hazama@jp.yazaki.com'),
+('松本 和真', 'kazuma.matsumoto@jp.yazaki.com'),
+('杉山 みち子', 'michiko.sugiyama@jp.yazaki.com'),
+('仲 名緒紀', 'naoki.naka@jp.yazaki.com'),
+('早川 実', 'minoru.hayakawa@jp.yazaki.com'),
+('谷口 慶之', 'yoshiyuki.taniguchi@jp.yazaki.com'),
+('吉田 俊朗', 'toshiro.yoshida@jp.yazaki.com'),
+('笠原 英男', 'hideo.kasahara.9303@jp.yazaki.com'),
+('杉浦 舞海', 'mami.sugiura@jp.yazaki.com'),
+('勝又 圭子', 'keiko.katsumata@jp.yazaki.com'),
+('山本 真由', NULL),
+('川上 恵子', 'keiko.kawakami.0909@jp.yazaki.com'),
+('中野 勇希', 'yuki.nakano@jp.yazaki.com'),
+('高橋 万由希', 'mayuki.takahashi@jp.yazaki.com'),
+('上野 雄司', 'yuji.ueno@jp.yazaki.com'),
+('NGUYEN THI THUY', 'thuy.thi.nguyen.tn@jp.yazaki.com'),
+('飯田 大喜', 'hiroki.iida@jp.yazaki.com'),
+('田邉 凜', 'rin.tanabe@jp.yazaki.com'),
+('中道 葵', 'aoi.nakamichi@jp.yazaki.com'),
+('臼井 城依', 'joi.usui@jp.yazaki.com'),
+('宮尾 悠太', 'yuta.miyao@jp.yazaki.com'),
+('芦屋 弘之', 'hiroyuki.ashiya@jp.yazaki.com'),
+('吉岡 清訓', 'kiyonori.yoshioka@jp.yazaki.com'),
+('石原 恵輔', 'keisuke.ishihara@jp.yazaki.com'),
+('岩崎 力也', 'rikiya.iwasaki@jp.yazaki.com'),
+('勝亦 さおり', 'saori.katsumata@jp.yazaki.com'),
+('勝山 寛', 'hiroshi.katsuyama@jp.yazaki.com'),
+('岩田 里奈', 'rina.iwata@jp.yazaki.com'),
+('池田 匠', NULL);
+
+
+
+INSERT INTO users (name, email) VALUES
+('榎本 めみ', 'memi.enomoto@jp.yazaki.com'),
+('岩﨑 萌々子', 'momoko.iwasaki@jp.yazaki.com'),
+('中根 智恵美', 'chiemi.nakane@jp.yazaki.com'),
+('新井 隆允', 'ryusuke.arai@jp.yazaki.com'),
+('満間 恵子', 'keiko.mitsuma@jp.yazaki.com'),
+('森 亜沙海', 'asami.mori@jp.yazaki.com'),
+('二木 健太', 'kenta.futaki@jp.yazaki.com'),
+('齋藤 涼凪', 'rina.saito.rs@jp.yazaki.com'),
+('鈴木 絹弥', 'kenya.suzuki@jp.yazaki.com'),
+('東瀨 彩子', 'ayako.azuse@jp.yazaki.com'),
+('金森 光祐', 'kosuke.kanamori@jp.yazaki.com'),
+('萩原 新奈', 'niina.hagiwara@jp.yazaki.com'),
+('中本 明花', 'sayaka.nakamoto@jp.yazaki.com'),
+('中市 遥香', 'haruka.nakaichi@jp.yazaki.com');
+
+
+
+INSERT INTO users (name, email) VALUES
+('門奈 真由', 'mayu.monna@jp.yazaki.com'),
+('小林 理来', 'riku.kobayashi@jp.yazaki.com'),
+('佐藤 佑紀', 'yuki.sato.1@jp.yazaki.com'),
+('小林 千紗', 'chisa.kobayashi@jp.yazaki.com'),
+('黒田 亘', 'wataru.kuroda@jp.yazaki.com'),
+('石綿 莉帆', 'riho.ishiwata@jp.yazaki.com'),
+('NGUYEN VAN CONG', 'cong.nguyen@jp.yazaki.com'),
+('鈴木 淳平', 'jumpei.suzuki@jp.yazaki.com'),
+('尾崎 真歩', 'maho.ozaki@jp.yazaki.com'),
+
+
+INSERT INTO users (name, email) VALUES
+('井上 シンディ リナ', 'rina.inoue@jp.yazaki.com'),
+('前原 啓', 'kei.maehara@jp.yazaki.com'),
+('杉本 七穂', 'nanaho.sugimoto@jp.yazaki.com'),
+('天野 アリス', 'alice.amano@jp.yazaki.com'),
+('鈴木 陽香', 'haruka.suzuki.hs@jp.yazaki.com'),
+('小見山 大輝', 'daiki.komiyama@jp.yazaki.com'),
+('望月 凪沙', 'nagisa.mochizuki@jp.yazaki.com'),
+('石川 修丞', 'yuka.ishikawa@jp.yazaki.com'),
+('今岡 明日未', 'asumi.imaoka@jp.yazaki.com'),
+('杉山 小春', 'koharu.sugiyama@jp.yazaki.com'),
+('平澤 理央菜', 'riona.hirasawa@jp.yazaki.com'),
+('相田 一哉', 'kazuya.aita@jp.yazaki.com'),
+('山田 天真', 'tenma.yamada@jp.yazaki.com'),
+('落合 絢子', 'ayako.ochiai@jp.yazaki.com'),
+('坂本 一哉', 'kazuya.sakamoto@jp.yazaki.com'),
+('後藤 一希', 'ikki.goto@jp.yazaki.com'),
+('大島 浄司', 'joji.oshima@jp.yazaki.com'),
+('北 翔太', 'shota.kita@jp.yazaki.com'),
+('長谷川 佑衣', 'yui.hasegawa-yh@jp.yazaki.com'),
+('田邉 桃香', 'momoka.tanabe@jp.yazaki.com'),
+('吉田 真央', 'mao.yoshida@jp.yazaki.com'),
+('杉山 奈穂', 'naho.sugiyama@jp.yazaki.com'),
+('藤井 翔太', 'shota.fujii@jp.yazaki.com'),
+('鈴木 啓太', 'keita.suzuki@jp.yazaki.com'),
+('吉田 敬', 'takashi.yoshida.2007@jp.yazaki.com'),
+('浅見 典彰', 'noriaki.asami@jp.yazaki.com'),
+('Torres Eduardo', 'eduardo.torres@jp.yazaki.com'),
+('望月 英史', 'hidefumi.mochizuki@jp.yazaki.com'),
+('鈴木 孝一', 'koichi.suzuki@jp.yazaki.com'),
+('中野 和輝', 'kazuki.nakano@jp.yazaki.com'),
+('奥村 惇一', 'jyunichi.okumura@jp.yazaki.com'),
+('川添 健翔', 'kensho.kawazoe@jp.yazaki.com'),
+('田代 梢', 'kozue.tashiro@jp.yazaki.com'),
+('望月 了允', 'ryosuke.mochizuki@jp.yazaki.com'),
+('吉本 弘', 'hiroshi.yoshimoto@jp.yazaki.com'),
+('山田 哲司', 'tetsuji.yamada@jp.yazaki.com'),
+('大湖 都々美', 'tsutsumi.ogo@jp.yazaki.com'),
+('大澤 拓磨', 'takuma.osawa@jp.yazaki.com'),
+('河野 弘人', 'hirohito.kawano@jp.yazaki.com');
+
+
+INSERT INTO users (name, email) VALUES
+('庄村 禎章', 'sadaaki.shomura@jp.yazaki.com'),
+('植田 菜月', 'natsuki.ueda@jp.yazaki.com'),
+('甲賀 恵理', 'eri.kouga@jp.yazaki.com');
+
+
+
+

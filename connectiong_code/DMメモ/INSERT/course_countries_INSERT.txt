@@ -1,0 +1,29 @@
+-- 国内, 静岡
+INSERT INTO course_countries (course_id, country_id)
+SELECT c.id, co.id
+FROM courses c, countries co
+WHERE c.course_name = '静岡' AND co.country_name = '国内';
+
+-- 国内, 梼原
+INSERT INTO course_countries (course_id, country_id)
+SELECT c.id, co.id
+FROM courses c, countries co
+WHERE c.course_name = '梼原' AND co.country_name = '国内';
+
+-- 海外, ホーチミン
+INSERT INTO course_countries (course_id, country_id)
+SELECT c.id, co.id
+FROM courses c, countries co
+WHERE c.course_name = 'ホーチミン' AND co.country_name = '海外';
+
+-- 海外, ハノイ
+INSERT INTO course_countries (course_id, country_id)
+SELECT c.id, co.id
+FROM courses c, countries co
+WHERE c.course_name = 'ハノイ' AND co.country_name = '海外';
+
+-- イン・ジャパン, なし
+INSERT INTO course_countries (course_id, country_id)
+SELECT c.id, co.id
+FROM courses c, countries co
+WHERE c.course_name = 'なし' AND co.country_name = 'イン・ジャパン';

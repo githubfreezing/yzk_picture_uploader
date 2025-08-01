@@ -1,0 +1,4 @@
+INSERT INTO countries (country_name) VALUES
+('国内'),
+('海外'),
+('イン・ジャパン');

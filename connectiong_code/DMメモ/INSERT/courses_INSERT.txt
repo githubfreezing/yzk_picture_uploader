@@ -1,0 +1,6 @@
+INSERT INTO courses (course_name) VALUES
+('静岡'),
+('梼原'),
+('ホーチミン'),
+('ハノイ'),
+('なし');

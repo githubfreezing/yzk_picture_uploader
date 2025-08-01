@@ -1,0 +1,224 @@
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = '静岡'
+  AND r.role_name = '指導員'
+  AND u.name IN (
+    '柴田 あゆ',
+    '東野 晋之介',
+    '山浦 華穂',
+    '山本 昂樹',
+    '日浦 和哉',
+    '髙塚 優月',
+    '川上 遼菜',
+    '久保田 千菜美'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = '静岡'
+  AND r.role_name = '事務局員'
+  AND u.name IN (
+    '西尾 学',
+    '小澤 彩子',
+    '駒野 有香',
+    '城所 久留実',
+    '袴田 貴彦',
+    '横山 耀平',
+    '髙杉 直哉',
+    '永島 優里'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = '梼原'
+  AND r.role_name = '指導員'
+  AND u.name IN (
+    '平田 夢乃',
+    '永松 瑠菜',
+    '髙島 聖',
+    '木村 駿介',
+    '鈴木 夏海',
+    '髙谷 侑翔',
+    '杉山 弥優',
+    '小安 唯衣',
+    '原口 直大',
+    '近藤 茉杏咲',
+    '圡谷 恵菜',
+    '浦 智博',
+    '都竹 佑樹',
+    '吉田 庵',
+    '青山 知裕',
+    '高井 光汰'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = '梼原'
+  AND r.role_name = '事務局員'
+  AND u.name IN (
+    '吉田 健',
+    '松本 光弘',
+    '今野 志',
+    '鈴木 義之',
+    '大隅 航佑',
+    '木村 枝美莉',
+    '矢後 達也',
+    '酒井 燈',
+    '間 雄大',
+    '松本 和真',
+    '杉山 みち子'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = 'ホーチミン'
+  AND r.role_name = '指導員'
+  AND u.name IN (
+    '上野 雄司',
+    'NGUYEN THI THUY',
+    '飯田 大喜',
+    '田邉 凜',
+    '中道 葵',
+    '臼井 城依',
+    '宮尾 悠太'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = 'ハノイ'
+  AND r.role_name = '事務局員'
+  AND u.name IN (
+    '芦屋 弘之',
+    '吉岡 清訓',
+    '石原 恵輔',
+    '岩崎 力也',
+    '勝亦 さおり',
+    '勝山 寛',
+    '岩田 里奈',
+    '池田 匠',
+    '榎本 めみ',
+    '髙杉 直哉',
+    '岩﨑 萌々子'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = 'ハノイ'
+  AND r.role_name = '指導員'
+  AND u.name IN (
+    '中根 智恵美',
+    '新井 隆允',
+    '満間 恵子',
+    '森 亜沙海',
+    '二木 健太',
+    '齋藤 涼凪',
+    '鈴木 絹弥',
+    '東瀨 彩子',
+    '金森 光祐',
+    '萩原 新奈',
+    '中本 明花'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = 'なし'
+  AND r.role_name = '指導員'
+  AND u.name IN (
+    '本行 桃果',
+    '中市 遥香',
+    '門奈 真由',
+    '小林 理来',
+    '佐藤 佑紀',
+    '小林 千紗',
+    '黒田 亘',
+    '石綿 莉帆',
+    'NGUYEN VAN CONG',
+    '鈴木 淳平',
+    '尾崎 真歩',
+    '庄村 禎章',
+    '井上 シンディ リナ',
+    '前原 啓',
+    '杉本 七穂',
+    '天野 アリス',
+    '鈴木 陽香',
+    '植田 菜月',
+    '小見山 大輝',
+    '望月 凪沙',
+    '石川 修丞',
+    '今岡 明日未',
+    '杉山 小春',
+    '平澤 理央菜',
+    '相田 一哉',
+    '山田 天真',
+    '甲賀 恵理',
+    '落合 絢子',
+    '坂本 一哉',
+    '後藤 一希',
+    '大島 浄司',
+    '北 翔太',
+    '長谷川 佑衣',
+    '田邉 桃香',
+    '吉田 真央',
+    '杉山 奈穂',
+    '藤井 翔太',
+    '鈴木 啓太'
+  );
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+INSERT INTO user_courses (user_id, course_id, role_id)
+SELECT u.id, c.id, r.id
+FROM users u, courses c, roles r
+WHERE
+  c.course_name = 'なし'
+  AND r.role_name = '事務局員'
+  AND u.name IN (
+    '吉田 敬',
+    '浅見 典彰',
+    'Torres Eduardo',
+    '望月 英史',
+    '鈴木 孝一',
+    '中野 和輝',
+    '奥村 惇一',
+    '川添 健翔',
+    '田代 梢',
+    '望月 了允',
+    '吉本 弘',
+    '山田 哲司',
+    '大湖 都々美',
+    '大澤 拓磨',
+    '河野 弘人',
+    '髙杉 直哉'
+  );
