@@ -1,5 +1,8 @@
+//App.tsx
+import './App.css';
+
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes'; // ← ルーティング定義ファイルへ
+import AppRoutes from './routes';
 
 const App = () => {
   return (

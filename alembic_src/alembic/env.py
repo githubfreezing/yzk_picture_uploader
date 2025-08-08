@@ -1,4 +1,21 @@
-from app.models.models import Base
+# from app.models.models import Base
+import os
+import sys
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config, pool
+from alembic import context
+
+# --- ✅ プロジェクトルートのパスを追加 ---
+# env.py のあるディレクトリ：YZK_PICTURE_UPLOADER/alembic_src/alembic
+# そこから ../.. でプロジェクトルート（YZK_PICTURE_UPLOADER）へ
+current_dir = os.path.dirname(__file__)
+project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
+sys.path.insert(0, project_root)
+
+# --- ✅ Baseのインポート ---
+from connectiong_code.models import Base
+
 #################################################################################
 from logging.config import fileConfig
 

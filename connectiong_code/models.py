@@ -1,19 +1,4 @@
-# # models.py
-# from sqlalchemy.orm import declarative_base
-# from sqlalchemy import Column, Integer, String
-
-# Base = declarative_base()
-
-# # 例として1つテーブルを定義します
-# class User(Base):
-#     __tablename__ = "users"
-
-#     id = Column(Integer, primary_key=True, index=True)
-#     name = Column(String, nullable=False)
-#     email = Column(String, unique=True, index=True)
-
-########################################################################
-
+import sqlalchemy as sa
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, declarative_base
 
@@ -26,6 +11,7 @@ class User(Base):
     email = Column(String)
 
     courses = relationship("UserCourse", back_populates="user")
+    pictures = relationship("Picture", back_populates="user")
 
 
 class Role(Base):
@@ -43,6 +29,7 @@ class Course(Base):
 
     users = relationship("UserCourse", back_populates="course")
     countries = relationship("CourseCountry", back_populates="course")
+    pictures = relationship("Picture", back_populates="course")
 
 
 class UserCourse(Base):
@@ -73,3 +60,15 @@ class CourseCountry(Base):
 
     course = relationship("Course", back_populates="countries")
     country = relationship("Country", back_populates="course_countries")
+
+
+class Picture(Base):
+    __tablename__ = "pictures"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    course_id = Column(Integer, ForeignKey("courses.id"))
+    url = Column(String(512), nullable=False)
+    uploaded_at = Column(sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False)
+
+    user = relationship("User", back_populates="pictures")
+    course = relationship("Course", back_populates="pictures")

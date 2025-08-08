@@ -75,10 +75,9 @@ psql -h database-1.czu8trax56dw.ap-northeast-1.rds.amazonaws.com -U yzkpuDbMaste
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 apt update && apt install sqlite3
-sqlite3 yzkpuDbName.db
+sqlite3 backend/yzkpuDbName.db
 .table
 INSERT INTO users (name, email) VALUES ('本行 桃果', 'momoka.hongyo@jp.yazaki.com');
-
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 yzk-picture-uploader-alb-1829537311.ap-northeast-1.elb.amazonaws.com
@@ -86,6 +85,19 @@ yzk-picture-uploader-alb-1829537311.ap-northeast-1.elb.amazonaws.com
 apt update && apt install sqlite3 -y
 
 D:\yzk_picture_uploader\yzk_picture_uploader\backend>sqlite3 yzkpuDbName.db
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+alembic -c alembic_src\alembic.ini revision --autogenerate -m "Add pictures table"
+
+alembic -c alembic_src\alembic.ini upgrade head
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+
+
+
+
 
 
 

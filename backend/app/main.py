@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, File, UploadFile, Form, Depends
+from fastapi import FastAPI, HTTPException, File, UploadFile, Form, Depends, APIRouter
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -8,12 +8,30 @@ from dotenv import load_dotenv
 import boto3
 import psycopg2
 from psycopg2 import OperationalError
-# from fastapi import FastAPI, Depends
-# from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import SQLAlchemyError
-from .models.models import User, Base, UserCourse, Course, CourseCountry, Country
+from .models.models import User, Base, UserCourse, Course, CourseCountry, Country, Picture
+
+from collections import defaultdict
+
+#ダウンロード機能
+import io
+import zipfile
+from fastapi.responses import StreamingResponse
+from urllib.parse import quote  # URLエンコード用
+
+from jose import jwt
+from datetime import datetime, timedelta
+SECRET_KEY = "your-secret-key"
+ALGORITHM = "HS256"
+
+def create_jwt_token(data: dict, expires_delta: timedelta = timedelta(minutes=30)):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + expires_delta
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
 
 load_dotenv()
 
@@ -44,8 +62,6 @@ app.add_middleware(
 class LoginRequest(BaseModel):
     email: str
 
-# DATABASE_URL = "postgresql://yzkpuDbMaster:yzk-picture-uploader-Db-Password@database-1.czu8trax56dw.ap-northeast-1.rds.amazonaws.com:5432/yzkpuDbName"
-# DATABASE_URL = "sqlite:///./yzkpuDbName.db"
 DATABASE_URL = os.getenv("DATABASE_URL")
 print(f"#####DATABASE_URL#####:{DATABASE_URL}")
 
@@ -89,64 +105,132 @@ async def login(request: LoginRequest):
 
         if user:
             message = f"ログイン成功!!!: {email}"
-            return {"message": message}
+            # return {"message": message}
+            token = create_jwt_token({"sub": email})
+            return {"token": token, "message": "ログイン成功"}
         else:
             message = f"ログイン失敗: {email} は登録されていません"
             raise HTTPException(status_code=401, detail=message)
     finally:
         session.close()
 
+# @app.post("/upload")
+# async def upload_files(
+#     files: List[UploadFile] = File(...),
+#     country: str = Form(...),
+#     region: str = Form(""),
+#     name: str = Form(...)
+# ):
+#     uploaded_files = []
+
+#     for file in files:
+#         content = await file.read()
+#         print(f"受信ファイル: {file.filename}, サイズ: {len(content)} bytes")
+
+#         # S3 パス作成：国/コース/氏名/ファイル名
+#         # コースが空文字なら除外
+#         s3_key_parts = [country]
+#         if region:
+#             s3_key_parts.append(region)
+#         s3_key_parts.append(name)
+#         s3_key = "/".join(s3_key_parts) + f"/{file.filename}"
+
+#         try:
+#             s3_client.put_object(
+#                 Bucket=AWS_STORAGE_BUCKET_NAME,
+#                 Key=s3_key,
+#                 Body=content,
+#                 ContentType=file.content_type or "application/octet-stream",
+#             )
+#             print(f"→ S3にアップロード済み: s3://{AWS_STORAGE_BUCKET_NAME}/{s3_key}")
+#             uploaded_files.append(s3_key)
+#         except Exception as e:
+#             print(f"S3アップロード失敗: {file.filename} → {e}")
+
+#     print(f"選択された国: {country}")
+#     print(f"選択されたコース: {region}")
+#     print(f"選択された氏名: {name}")
+
+#     return {
+#         "message": f"{len(uploaded_files)} 件のファイルを S3 に保存しました",
+#         "uploaded_files": uploaded_files,
+#     }
+
 @app.post("/upload")
 async def upload_files(
     files: List[UploadFile] = File(...),
     country: str = Form(...),
-    region: str = Form(""),
+    # region: str = Form(""),
+    region: str = Form(...),
     name: str = Form(...)
 ):
     uploaded_files = []
+    db: Session = SessionLocal()
 
-    for file in files:
-        content = await file.read()
-        print(f"受信ファイル: {file.filename}, サイズ: {len(content)} bytes")
+    try:
+        # ユーザー特定（必要に応じてフィルタを追加）
+        user = db.query(User).filter(User.name == name).first()
+        if not user:
+            return {"error": f"ユーザー '{name}' が見つかりません"}
 
-        # S3 パス作成：国/コース/氏名/ファイル名
-        # コースが空文字なら除外
-        s3_key_parts = [country]
-        if region:
-            s3_key_parts.append(region)
-        s3_key_parts.append(name)
-        s3_key = "/".join(s3_key_parts) + f"/{file.filename}"
+        # course_id 変換
+        print("##############region##############")
+        print(region)
+        course = db.query(Course).filter(Course.course_name == region).first()
+        course_id = course.id if course else None
 
-        try:
-            s3_client.put_object(
-                Bucket=AWS_STORAGE_BUCKET_NAME,
-                Key=s3_key,
-                Body=content,
-                ContentType=file.content_type or "application/octet-stream",
-            )
-            print(f"→ S3にアップロード済み: s3://{AWS_STORAGE_BUCKET_NAME}/{s3_key}")
-            uploaded_files.append(s3_key)
-        except Exception as e:
-            print(f"S3アップロード失敗: {file.filename} → {e}")
+        for file in files:
+            content = await file.read()
+            print(f"受信ファイル: {file.filename}, サイズ: {len(content)} bytes")
 
-    print(f"選択された国: {country}")
-    print(f"選択されたコース: {region}")
-    print(f"選択された氏名: {name}")
+            # S3 キー作成
+            s3_key_parts = [country]
+            if region:
+                s3_key_parts.append(region)
+            s3_key_parts.append(name)
+            s3_key = "/".join(s3_key_parts) + f"/{file.filename}"
 
-    return {
-        "message": f"{len(uploaded_files)} 件のファイルを S3 に保存しました",
-        "uploaded_files": uploaded_files,
-    }
+            try:
+                # S3にアップロード
+                s3_client.put_object(
+                    Bucket=AWS_STORAGE_BUCKET_NAME,
+                    Key=s3_key,
+                    Body=content,
+                    ContentType=file.content_type or "application/octet-stream",
+                )
+                print(f"→ S3にアップロード済み: s3://{AWS_STORAGE_BUCKET_NAME}/{s3_key}")
+                uploaded_files.append(s3_key)
+
+                # RDSのpicturesに保存
+                picture = Picture(
+                    user_id=user.id,
+                    course_id=course_id,
+                    url=s3_key,  # または file_path
+                    uploaded_at=datetime.utcnow()
+                )
+                db.add(picture)
+
+            except Exception as e:
+                print(f"S3アップロード失敗: {file.filename} → {e}")
+
+        db.commit()
+
+        return {
+            "message": f"{len(uploaded_files)} 件のファイルを S3 に保存し、DB に登録しました",
+            "uploaded_files": uploaded_files,
+        }
+
+    except Exception as e:
+        db.rollback()
+        return {"error": str(e)}
+
+    finally:
+        db.close()
 
 class DisplayRequest(BaseModel):
     country: str
     region: str
     name: str
-
-# @app.post("/display")
-# async def display_data(req: DisplayRequest):
-#     print(f"表示：{req.country}/{req.region}/{req.name}")
-#     return {"message": "表示成功"}
 
 class FileListResponse(BaseModel):
     message: str
@@ -195,61 +279,6 @@ async def display_data(req: DisplayRequest):
             "files": []
         }
 
-# @app.get("/users-list")
-# def get_users_list(db: Session = Depends(get_db)):
-#     # 「国内」「静岡」に一致する国ID取得
-#     target_countries = db.query(Country.id).filter(Country.country_name.in_(["国内", "静岡"])).subquery()
-
-#     # 該当するコースID取得
-#     target_courses = db.query(CourseCountry.course_id).filter(CourseCountry.country_id.in_(target_countries)).subquery()
-
-#     # ユーザー取得
-#     users = (
-#         db.query(User)
-#         .join(UserCourse, User.id == UserCourse.user_id)
-#         .filter(UserCourse.course_id.in_(target_courses))
-#         .distinct()
-#         .all()
-#     )
-
-#     print(f"#####users#####{users}")
-
-#     return [{"id": user.id, "name": user.name, "email": user.email} for user in users]
-
-
-
-# from collections import defaultdict
-# @app.get("/users-list")
-# def get_users_list(db: Session = Depends(get_db)):
-#         # users に関するすべての情報をJOINして取得
-#     query = (
-#         db.query(
-#             User.name.label("user_name"),
-#             Country.country_name,
-#             Course.course_name,
-#         )
-#         .join(UserCourse, User.id == UserCourse.user_id)
-#         .join(Course, UserCourse.course_id == Course.id)
-#         .join(CourseCountry, Course.id == CourseCountry.course_id)
-#         .join(Country, CourseCountry.country_id == Country.id)
-#         .all()
-#     )
-
-#     # データをネスト構造に変換
-#     result = defaultdict(lambda: {"regions": defaultdict(list)})
-
-#     for row in query:
-#         result[row.country_name]["regions"][row.course_name].append(row.user_name)
-
-#     # defaultdict を dict に変換して返す
-#     return {country: {"regions": dict(data["regions"])} for country, data in result.items()}
-
-########################################################################################################
-
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
-from collections import defaultdict
-
 @app.get("/users-list")
 def get_users_list(db: Session = Depends(get_db)):
     query = (
@@ -274,3 +303,38 @@ def get_users_list(db: Session = Depends(get_db)):
         "regions": dict(data["regions"]),
         **({"names": data.get("names")} if "names" in data else {})
     } for country, data in result.items()}
+
+class DisplayZipRequest(BaseModel):
+    country: str
+    region: str = ""
+    name: str
+    filenames: List[str]  # 選択されたファイル名のリスト
+
+@app.post("/download-zip")
+async def download_zip(req: DisplayZipRequest):
+    s3 = boto3.client("s3")
+    s3_key_parts = [req.country]
+    if req.region:
+        s3_key_parts.append(req.region)
+    s3_key_parts.append(req.name)
+    prefix = "/".join(s3_key_parts) + "/"
+
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, "w") as zip_file:
+        for filename in req.filenames:
+            key = prefix + filename  # ファイル名を指定して取得
+            file_obj = s3.get_object(Bucket=AWS_STORAGE_BUCKET_NAME, Key=key)
+            file_data = file_obj['Body'].read()
+            zip_file.writestr(filename, file_data)
+
+    zip_buffer.seek(0)
+
+    encoded_filename = quote(f"{req.name}_selected_images.zip")
+
+    return StreamingResponse(
+        zip_buffer,
+        media_type="application/x-zip-compressed",
+        headers={
+            "Content-Disposition": f"attachment; filename*=UTF-8''{encoded_filename}"
+        }
+    )

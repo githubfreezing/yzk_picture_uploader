@@ -1,3 +1,4 @@
+//pages/Home.tsx
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +35,9 @@ const Home = () => {
 
       console.log('サーバー応答:', data.message);
       alert(`ログイン成功：${data.message}`);
+      //ログイン情報の保存
+      localStorage.setItem('token', data.token); // ← トークン保存
+      console.log('トークン:', data.token);
       navigate('/upload-view'); // ✅ ログイン成功した場合に遷移
 
     } catch (error) {
@@ -44,7 +48,7 @@ const Home = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box mt={8} display="flex" flexDirection="column" alignItems="center">
+      <Box mt={0} display="flex" flexDirection="column" alignItems="center">
         <Typography variant="h4" gutterBottom>
           ログイン
         </Typography>
